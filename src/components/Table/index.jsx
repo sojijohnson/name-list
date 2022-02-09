@@ -11,18 +11,20 @@ const Table = ({ data, rowsPerPage }) => {
   const [hide , setHide]=useState(true)
 
   const toggleShow=(username)=>{
-setHide(!hide)
+    setHide(!hide)
     const showState = detailshown.slice()
     
     const index = showState.indexOf(username)
     if (index>=0){
     showState.splice(index, 1)
     setDetailshown(showState)
+    setHide(hide)
     }else{
       showState.push(username)
       setDetailshown(showState)
+      setHide(hide)
     }
-    
+   
     }
 
   return (
@@ -30,6 +32,7 @@ setHide(!hide)
       <table className={styles.table}>
         <thead className={styles.tableRowHeader}>
           <tr>
+            <th className={styles.tableHeader}>ID</th>
             <th className={styles.tableHeader}>FirstName</th>
             <th className={styles.tableHeader}>LastName</th>
             
@@ -42,7 +45,7 @@ setHide(!hide)
         <tbody>
           {slice.map((el) => (
             <tr className={styles.tableRowItems} key={el.id}>
-
+                 <td className={styles.tableCell}>{el.id}</td>
               <td className={styles.tableCell}>{el.first_name}</td>
               <td className={styles.tableCell}>{el.last_name}</td>
              
@@ -51,7 +54,7 @@ setHide(!hide)
            
      { detailshown.includes(el.first_name) &&
                (   <tr>
-                  <td className={hide?styles.tableCell1:styles.tableCell}> {el.email}</td>
+                  <td className={hide?styles.tableCell1:styles.tableCell} colSpan="2"> {el.email}</td>
               </tr>
              
               ) } </td>
@@ -59,20 +62,20 @@ setHide(!hide)
               <td>   
             { detailshown.includes(el.first_name) &&
                      (
-           <tr> <td className={styles.tableCell}> {el.gender } </td>     
+           <tr> <td className={hide?styles.tableCell1:styles.tableCell}> {el.gender } </td>     
                     </tr>    ) }
       
                     </td>  <td>   
            
            { detailshown.includes(el.first_name) && (
-            <tr> <td className={styles.tableCell}> {el.ip_address }  </td>            
+            <tr> <td className={hide?styles.tableCell1:styles.tableCell}> {el.ip_address }  </td>            
              </tr> ) }
       
                     </td>
     
 
               
-                 <td><button onClick={()=>toggleShow(el.first_name)}> 
+                 <td><button className={styles.toggleButton} onClick={()=>toggleShow(el.first_name)}> 
                  Show details
                  </button></td>
            </tr>
