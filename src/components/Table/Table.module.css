@@ -31,6 +31,12 @@
 .tableHeader:last-child {
   border-top-right-radius: 15px;
 }
+.toggleButton{
+  color: teal;
+  background-color: wheat;
+  border-radius: 5px;
+  position: fixed;
+}
 
 .tableRowItems {
   cursor: auto;
